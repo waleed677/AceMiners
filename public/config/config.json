@@ -1,0 +1,18 @@
+{
+  "CONTRACT_ADDRESS": "0x2Fbf9e5915137e1FD3da0B941295168b61CfD7dB",
+  "SCAN_LINK": "https://etherscan.io/address/0x2Fbf9e5915137e1FD3da0B941295168b61CfD7dB",
+  "NETWORK": {
+    "NAME": "Ethereum",
+    "SYMBOL": "ETH",
+    "ID": 4
+  },
+  "NFT_NAME": "Metaverse’s Secret",
+  "SYMBOL": "JC",
+  "MAX_SUPPLY": 6969 ,
+  "WEI_COST": 69000000000000000,
+  "DISPLAY_COST": 0.069,
+  "GAS_LIMIT": 285000,
+  "MARKETPLACE": "Opeansea",
+  "MARKETPLACE_LINK": "https://opensea.io/collection/mutant-age-camel-club",
+  "SHOW_BACKGROUND": true
+}

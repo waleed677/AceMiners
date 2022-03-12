@@ -1,0 +1,41 @@
+:root {
+  --primary: #E37407;
+  --primary-text: #1a1a1a;
+  --secondary: #5FCDE4;
+  --secondary-text: #ffffff;
+  --accent: #505050;
+  --accent-text: #ffffff;
+}
+
+body{
+  background-color: #000000;
+  background-image: url('./images/bg.png') !important; ;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center ;
+}
+
+
+
+.flexContainer{
+  display:flex;
+  align-items:center;
+  justify-content:space-evenly;
+  vertical-align:middle;
+  margin:20px auto;
+  width: 80%;
+}
+
+.flexItems{
+  width: 10%;
+}
+.flexItems > a > img{
+  width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .flexItems{
+    width: 15%;
+  }
+}
+

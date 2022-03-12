@@ -1,0 +1,41 @@
+{
+  "name": "nft-punk-numbers",
+  "version": "1.0.0",
+  "description": "nft-punk-numbers",
+  "private": true,
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-ga": "^3.3.0",
+    "react-icons": "^4.3.1",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "4.0.3",
+    "react-scroll": "^1.8.4",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1",
+    "sass": "^1.49.7",
+    "styled-components": "^5.3.3",
+    "web-vitals": "^1.0.1",
+    "web3": "^1.7.0",
+    "web3-eth-contract": "^1.7.0"
+  },
+  "author": "Mir Imad Ahmed",
+  "license": "MIT",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
