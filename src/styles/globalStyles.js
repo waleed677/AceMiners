@@ -129,7 +129,7 @@ column-gap:${({ gap }) => (gap ? gap + "%" : "20%")};
 
 export const Mint = styled.div`
   padding:40px 80px;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.3);
   border:1px solid #4b4b4b;
   border-radius:25px;
   width: 40%;
@@ -200,12 +200,13 @@ export const connectButton = styled.button`
 
 export const maxButton = styled.button`
   width:30%;
-  background : var(--primary);
+  background : #3F58A7;
   height:50px;
   border-radius:10px;
   font-family: 'wonder';
   font-size:1.5rem;
   color: #fff !important ;
+  border: 1px solid #3F58A7;
 
   @media screen and (max-width: 768px) {
     position: relative;

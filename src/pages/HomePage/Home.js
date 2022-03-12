@@ -17,7 +17,7 @@ function Home() {
   const [supply, setTotalSupply] = useState(0);
   const [feedback, setFeedback] = useState("");
   const [mintAmount, setMintAmount] = useState(1);
-  const [displayCost, setDisplayCost] = useState(0.069);
+  const [displayCost, setDisplayCost] = useState(0.2);
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const [CONFIG, SET_CONFIG] = useState({
@@ -85,16 +85,16 @@ function Home() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 5) {
-      newMintAmount = 5;
+    if (newMintAmount > 2) {
+      newMintAmount = 2;
     }
     setMintAmount(newMintAmount);
     setDisplayCost(parseFloat(CONFIG.DISPLAY_COST * newMintAmount).toFixed(3));
   };
 
   const maxNfts = () => {
-    setMintAmount(5);
-    setDisplayCost(parseFloat(CONFIG.DISPLAY_COST * 5).toFixed(3));
+    setMintAmount(2);
+    setDisplayCost(parseFloat(CONFIG.DISPLAY_COST * 2).toFixed(3));
   };
 
   const getData = async () => {
@@ -135,7 +135,7 @@ function Home() {
           jc={"space-evenly"}
           ai={"center"}
           fd={"row"}
-          mt={"25vh"}
+          mt={"20vh"}
         >
           <s.Mint>
             <s.TextTitle size={6.0} style={{ letterSpacing: "3px" }}>
@@ -143,7 +143,7 @@ function Home() {
             </s.TextTitle>
             <s.SpacerSmall />
             <s.TextSubTitle size={1.4}>
-              {7777 - supply} of 7777 NFT's Available
+              {1000 - supply} of 1000 NFT's Available
             </s.TextSubTitle>
             <s.SpacerLarge />
             <s.SpacerLarge />
@@ -228,7 +228,7 @@ function Home() {
                   getData();
                 }}
               >
-                Connect to Wallet
+                Connect Your Wallet
               </s.connectButton>
             )}
 
@@ -245,6 +245,7 @@ function Home() {
             ) : (
               ""
             )}
+            <s.SpacerLarge/>
             <Social/>
           </s.Mint>
           
