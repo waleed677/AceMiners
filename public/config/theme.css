@@ -1,41 +1,63 @@
 :root {
-  --primary: #ffffff;
+  --primary: #f7f7f7 !important;
   --primary-text: #1a1a1a;
-  --secondary: #5FCDE4;
+  --secondary: #5fcde4;
   --secondary-text: #ffffff;
   --accent: #505050;
   --accent-text: #ffffff;
 }
 
-body{
-  background-color: #000000;
-  background-image: url('./images/bg.png') !important; ;
+body {
+  /* background: #3491F9 !important; */
+  background-image: url("./images/bg.png") !important;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-position: center ;
+  background-size: cover;
+  background-position: top;
 }
 
-
-
-.flexContainer{
-  display:flex;
-  align-items:center;
-  justify-content:space-evenly;
-  vertical-align:middle;
-  margin:20px auto;
+.flexContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  vertical-align: middle;
+  margin: 20px auto;
   width: 80%;
 }
 
-.flexItems{
+.flexItems {
   width: 10%;
 }
-.flexItems > a > img{
+.flexItems > a > img {
   width: 100%;
 }
 
+
+@media screen and (max-width: 480px) {
+  body {
+    background-size: auto;
+    background-position: center;
+    background-size: cover;
+  }
+}
+
 @media only screen and (max-width: 600px) {
-  .flexItems{
+  .flexItems {
     width: 15%;
   }
 }
 
+.overlay {
+  background: #222222;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  top: 0;
+  opacity: 0.5;
+  z-index: 5000;
+  width: 100%;
+}
+
+.spinner{
+  margin: auto;
+
+}
