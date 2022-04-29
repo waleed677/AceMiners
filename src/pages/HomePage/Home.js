@@ -272,7 +272,6 @@ function Home() {
           </s.TextTitle>
           <s.SpacerSmall />
           <s.SpacerLarge />
-          <s.SpacerLarge />
           <s.FlexContainer fd={"row"} ai={"center"} jc={"space-between"}>
             <s.TextTitle>Available</s.TextTitle>
             <s.TextTitle color={"var(--primary)"}>
@@ -281,8 +280,7 @@ function Home() {
           </s.FlexContainer>
           <s.SpacerSmall />
           <s.Line />
-          <s.SpacerLarge />
-
+          <s.SpacerSmall />
           <s.FlexContainer fd={"row"} ai={"center"} jc={"space-between"}>
 
             <s.TextTitle>Amount</s.TextTitle>
@@ -327,14 +325,14 @@ function Home() {
 
           <s.SpacerSmall />
           <s.Line />
-          <s.SpacerLarge />
+          <s.SpacerSmall />
           <s.FlexContainer fd={"row"} ai={"center"} jc={"space-between"}>
             <s.TextTitle>Total Price</s.TextTitle>
             <s.TextTitle color={"var(--primary)"}>{displayCost}</s.TextTitle>
           </s.FlexContainer>
           <s.SpacerSmall />
           <s.Line />
-          <s.SpacerSmall />
+        
           <s.SpacerLarge />
           {blockchain.account !== "" &&
             blockchain.smartContract !== null &&
@@ -398,8 +396,6 @@ function Home() {
           )}
         </s.Mint>
       </s.FlexContainer>
-
-
     </>
   );
 }
