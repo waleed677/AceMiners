@@ -4,7 +4,6 @@ import { connectWallet } from "../../redux/blockchain/blockchainActions";
 import { fetchData } from "./../../redux/data/dataActions";
 import * as s from "./../../styles/globalStyles";
 import whitelistAddresses from "../walletAddresses";
-import ogAddresses from "../walletAddressesOG";
 import Loader from "../../components/Loader/loader";
 
 const { createAlchemyWeb3, ethers } = require("@alch/alchemy-web3");
@@ -150,6 +149,7 @@ function Home() {
         const hexProof = merkleTree.getHexProof(claimingAddress);
         setProof(hexProof);
         let mintWL = merkleTree.verify(hexProof, claimingAddress, rootHash);
+        console.log({mintWL});
         let mintWLContractMethod = await blockchain.smartContract.methods
           .isWhitelisted(blockchain.account, hexProof)
           .call();
@@ -179,7 +179,6 @@ function Home() {
     const abi = await abiResponse.json();
     var contract = new Contract(abi, '0x233e569Abe76E628E3B89D4BBCA4cfA37c1bca0c');
     contract.setProvider(web3.currentProvider);
-    console.log(contract);
     // Get Total Supply
     const totalSupply = await contract.methods
       .totalSupply()
