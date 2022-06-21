@@ -4,6 +4,7 @@ import { connectWallet } from "../../redux/blockchain/blockchainActions";
 import { fetchData } from "./../../redux/data/dataActions";
 import * as s from "./../../styles/globalStyles";
 import whitelistAddresses from "../walletAddresses";
+import earlyAccessAddresses from "../walletAddressesEarlyAccess";
 import Loader from "../../components/Loader/loader";
 
 const { createAlchemyWeb3, ethers } = require("@alch/alchemy-web3");
@@ -17,6 +18,13 @@ const leafNodes = whitelistAddresses.map(addr => keccak256(addr));
 const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true });
 const rootHash = merkleTree.getRoot();
 console.log('Whitelist Merkle Tree\n', merkleTree.toString());
+
+
+// EarlyAccess MerkleTree
+const leafNodesEarly = earlyAccessAddresses.map(addr => keccak256(addr));
+const merkleTreeEarly = new MerkleTree(leafNodesEarly, keccak256, { sortPairs: true });
+const rootHashEarly = merkleTreeEarly.getRoot();
+console.log('Early Access Tree\n', merkleTreeEarly.toString());
 
 
 
@@ -35,6 +43,7 @@ function Home() {
   const [state, setState] = useState(-1);
   const [nftCost, setNftCost] = useState(-1);
   const [canMintWL, setCanMintWL] = useState(false);
+  const [canMintEA, setCanMintEA] = useState(false);
   const [disable, setDisable] = useState(false);
   const [max, setMax] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -149,10 +158,11 @@ function Home() {
         const hexProof = merkleTree.getHexProof(claimingAddress);
         setProof(hexProof);
         let mintWL = merkleTree.verify(hexProof, claimingAddress, rootHash);
-        console.log({mintWL});
+        console.log({ mintWL });
         let mintWLContractMethod = await blockchain.smartContract.methods
           .isWhitelisted(blockchain.account, hexProof)
           .call();
+        console.log({ mintWLContractMethod });
         if (mintWLContractMethod && mintWL) {
           setCanMintWL(mintWL);
           console.log(mintWL);
@@ -162,8 +172,28 @@ function Home() {
           setFeedback(`Sorry, your wallet is not on the whitelist`);
           setDisable(true);
         }
-      } else {
-        setFeedback(`Welcome, you can mint up to 5 NFTs per transaction`)
+      } else if (currentState == 2) {
+        const claimingAddress = keccak256(blockchain.account);
+        const hexProof = merkleTreeEarly.getHexProof(claimingAddress);
+        setProof(hexProof);
+        let mintEarly = merkleTreeEarly.verify(hexProof, claimingAddress, rootHashEarly);
+        console.log({ mintEarly });
+        let mintEAContractMethod = await blockchain.smartContract.methods
+          .isEarlyAccess(blockchain.account, hexProof)
+          .call();
+        console.log({ mintEAContractMethod });
+        if (mintEAContractMethod && mintEarly) {
+          setCanMintEA(mintEarly);
+          console.log(mintEarly);
+          setFeedback(`Welcome Early Access Member, you can mint up to 2 NFTs`)
+          setDisable(false)
+        } else {
+          setFeedback(`Sorry, your wallet is not on the Early Access list`);
+          setDisable(true);
+        }
+      }
+      else {
+        setFeedback(`Welcome, you can mint up to 10 NFTs per transaction`)
       }
     }
   };
@@ -177,7 +207,7 @@ function Home() {
       },
     });
     const abi = await abiResponse.json();
-    var contract = new Contract(abi, '0x233e569Abe76E628E3B89D4BBCA4cfA37c1bca0c');
+    var contract = new Contract(abi, '0x9C5e5476AEac9AFDf484e83CC49cc412f3b76bec');
     contract.setProvider(web3.currentProvider);
     // Get Total Supply
     const totalSupply = await contract.methods
@@ -199,6 +229,20 @@ function Home() {
       setDisable(true);
       setDisplayCost(0.00);
       setMax(0);
+    }
+    else if (currentState == 2) {
+      setStatusAlert("EARLY ACCESS IS NOW LIVE!");
+      let earlyAccessCost = await contract.methods
+        .costEarlyAccess()
+        .call();
+      setDisplayCost(web3.utils.fromWei(earlyAccessCost));
+      setNftCost(web3.utils.fromWei(earlyAccessCost));
+      setFeedback("Have you got the Early Access?");
+
+      let earlyMax = await contract.methods
+        .maxMintAmountEarlyAccess()
+        .call();
+      setMax(earlyMax);
     }
     else if (currentState == 1) {
       let wlCost = await contract.methods
@@ -254,8 +298,8 @@ function Home() {
 
   return (
     <>
-     
-        {loading && <Loader />}
+
+      {loading && <Loader />}
 
       <s.FlexContainer jc={"center"} ai={"center"} fd={"row"}
       >
@@ -331,7 +375,7 @@ function Home() {
           </s.FlexContainer>
           <s.SpacerSmall />
           <s.Line />
-        
+
           <s.SpacerLarge />
           {blockchain.account !== "" &&
             blockchain.smartContract !== null &&
