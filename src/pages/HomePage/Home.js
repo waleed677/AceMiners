@@ -7,7 +7,8 @@ import whitelistAddresses from "../walletAddresses";
 import earlyAccessAddresses from "../walletAddressesEarlyAccess";
 import Loader from "../../components/Loader/loader";
 
-const { createAlchemyWeb3, ethers } = require("@alch/alchemy-web3");
+const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
+const web3 = createAlchemyWeb3("https://eth-rinkeby.alchemyapi.io/v2/DWS-10QG2tUKcNhG_nUqMvkRQT8pwwyv");
 var Web3 = require('web3');
 var Contract = require('web3-eth-contract');
 const { MerkleTree } = require('merkletreejs');
@@ -67,7 +68,7 @@ function Home() {
     SHOW_BACKGROUND: false,
   });
 
-  const claimNFTs = () => {
+  const claimNFTs = async () => {
     let cost = nftCost;
     cost = Web3.utils.toWei(String(cost), "ether");
 
@@ -77,6 +78,17 @@ function Home() {
     setFeedback(`Minting your ${CONFIG.NFT_NAME}`);
     setClaimingNft(true);
     setLoading(true);
+
+    // Calculate Gas Fee
+    const estGas = await web3.eth.estimateGas({
+      from: blockchain.account,
+      to: CONFIG.CONTRACT_ADDRESS,
+      gas: String(totalGasLimit)
+
+     }); 
+
+     console.log({estGas});
+
     // setDisable(true);
     blockchain.smartContract.methods
       .mint(mintAmount, proof)
@@ -199,7 +211,6 @@ function Home() {
   };
 
   const getDataWithAlchemy = async () => {
-    const web3 = createAlchemyWeb3("https://eth-rinkeby.alchemyapi.io/v2/DWS-10QG2tUKcNhG_nUqMvkRQT8pwwyv");
     const abiResponse = await fetch("/config/abi.json", {
       headers: {
         "Content-Type": "application/json",
@@ -220,7 +231,6 @@ function Home() {
       .currentState()
       .call();
     setState(currentState);
-    console.log(currentState);
 
     // Set Price and Max According to State
 
