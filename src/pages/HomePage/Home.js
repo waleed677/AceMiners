@@ -49,6 +49,7 @@ function Home() {
   const [max, setMax] = useState(0);
   const [loading, setLoading] = useState(true);
   const [proof, setProof] = useState([]);
+  const [totalMint, setTotalMint] = useState(0);
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
     SCAN_LINK: "",
@@ -110,9 +111,10 @@ function Home() {
           .then((res) => {
             setTotalSupply(res);
           });
-
         dispatch(fetchData(blockchain.account));
+        getData();
       });
+     
   };
 
 
@@ -158,7 +160,18 @@ function Home() {
         .currentState()
         .call();
       setState(currentState);
+
+      //  no of nfts minted by user
+      let nftMintedByUser = await blockchain.smartContract.methods
+      .mintableAmountForUser(blockchain.account)
+      .call();
+      setMax(nftMintedByUser);
+      console.log( {nftMintedByUser});
+      
+      // Nft states
       if (currentState == 1) {
+        let totalWLNfts = 50;
+        supply < totalWLNfts && nftMintedByUser != 0 ? setDisable(false) : setDisable(true);
         const claimingAddress = keccak256(blockchain.account);
         // `getHexProof` returns the neighbour leaf and all parent nodes hashes that will
         // be required to derive the Merkle Trees root hash.
@@ -170,13 +183,14 @@ function Home() {
           .call();
         if (mintWLContractMethod && mintWL) {
           setCanMintWL(mintWL);
-          setFeedback(`Welcome Whitelist Member, you can mint up to 2 NFTs`)
-          setDisable(false)
+          setFeedback(`Welcome Whitelist Member, you can mint up to ${nftMintedByUser} NFTs`)
         } else {
           setFeedback(`Sorry, your wallet is not on the whitelist`);
           setDisable(true);
         }
       } else if (currentState == 2) {
+        let totalEANfts = 150;
+        supply < totalEANfts && nftMintedByUser != 0 ? setDisable(false) : setDisable(true);
         const claimingAddress = keccak256(blockchain.account);
         const hexProof = merkleTreeEarly.getHexProof(claimingAddress);
         setProof(hexProof);
@@ -186,15 +200,16 @@ function Home() {
           .call();
         if (mintEAContractMethod && mintEarly) {
           setCanMintEA(mintEarly);
-          setFeedback(`Welcome Early Access Member, you can mint up to 2 NFTs`)
-          setDisable(false)
+          setFeedback(`Welcome Early Access Member, you can mint up to ${nftMintedByUser} NFTs`)
         } else {
           setFeedback(`Sorry, your wallet is not on the Early Access list`);
           setDisable(true);
         }
       }
       else {
-        setFeedback(`Welcome, you can mint up to 10 NFTs per transaction`)
+        let totalPublic = 500;
+        supply < totalPublic ? setDisable(false) : setDisable(true);
+        setFeedback(`Welcome, you can mint up to ${nftMintedByUser} NFTs per transaction`)
       }
     }
   };
@@ -387,7 +402,6 @@ function Home() {
                 onClick={(e) => {
                   e.preventDefault();
                   claimNFTs();
-                  getData();
                 }}
               >
 
