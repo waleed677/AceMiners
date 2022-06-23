@@ -1,12 +1,12 @@
 {
-  "CONTRACT_ADDRESS": "0x9C5e5476AEac9AFDf484e83CC49cc412f3b76bec",
+  "CONTRACT_ADDRESS": "0x0770a317AF574fBa15F205A60bCA9075206ad0a8",
   "SCAN_LINK": "https://etherscan.io/address/0x9C5e5476AEac9AFDf484e83CC49cc412f3b76bec",
   "NETWORK": {
-    "NAME": "Ethereum Rinkeby",
+    "NAME": "Ethereum",
     "SYMBOL": "ETH",
-    "ID": 4
+    "ID": 1
   },
-  "NETWORK_ID_WALLET": 4,
+  "NETWORK_ID_WALLET": 1,
   "NFT_NAME": "Aceminers NFT",
   "SYMBOL": "AM",
   "MAX_SUPPLY": 500 ,

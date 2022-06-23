@@ -8,7 +8,7 @@ import earlyAccessAddresses from "../walletAddressesEarlyAccess";
 import Loader from "../../components/Loader/loader";
 
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
-const web3 = createAlchemyWeb3("https://eth-rinkeby.alchemyapi.io/v2/DWS-10QG2tUKcNhG_nUqMvkRQT8pwwyv");
+const web3 = createAlchemyWeb3("https://eth-mainnet.alchemyapi.io/v2/DWS-10QG2tUKcNhG_nUqMvkRQT8pwwyv");
 var Web3 = require('web3');
 var Contract = require('web3-eth-contract');
 const { MerkleTree } = require('merkletreejs');
@@ -79,21 +79,16 @@ function Home() {
     setClaimingNft(true);
     setLoading(true);
 
-    // Calculate Gas Fee
-    const estGas = await web3.eth.estimateGas({
+    const estGas = await blockchain.smartContract.methods.
+    mint(mintAmount,proof).estimateGas({
       from: blockchain.account,
       to: CONFIG.CONTRACT_ADDRESS,
-      gas: String(totalGasLimit)
-
-     }); 
-
-     console.log({estGas});
-
-    // setDisable(true);
+    });
+    console.log({ estGas });
     blockchain.smartContract.methods
       .mint(mintAmount, proof)
       .send({
-        gasLimit: String(totalGasLimit),
+        gasLimit: estGas,
         to: CONFIG.CONTRACT_ADDRESS,
         from: blockchain.account,
         value: totalCostWei,
@@ -170,14 +165,11 @@ function Home() {
         const hexProof = merkleTree.getHexProof(claimingAddress);
         setProof(hexProof);
         let mintWL = merkleTree.verify(hexProof, claimingAddress, rootHash);
-        console.log({ mintWL });
         let mintWLContractMethod = await blockchain.smartContract.methods
           .isWhitelisted(blockchain.account, hexProof)
           .call();
-        console.log({ mintWLContractMethod });
         if (mintWLContractMethod && mintWL) {
           setCanMintWL(mintWL);
-          console.log(mintWL);
           setFeedback(`Welcome Whitelist Member, you can mint up to 2 NFTs`)
           setDisable(false)
         } else {
@@ -189,14 +181,11 @@ function Home() {
         const hexProof = merkleTreeEarly.getHexProof(claimingAddress);
         setProof(hexProof);
         let mintEarly = merkleTreeEarly.verify(hexProof, claimingAddress, rootHashEarly);
-        console.log({ mintEarly });
         let mintEAContractMethod = await blockchain.smartContract.methods
           .isEarlyAccess(blockchain.account, hexProof)
           .call();
-        console.log({ mintEAContractMethod });
         if (mintEAContractMethod && mintEarly) {
           setCanMintEA(mintEarly);
-          console.log(mintEarly);
           setFeedback(`Welcome Early Access Member, you can mint up to 2 NFTs`)
           setDisable(false)
         } else {
@@ -217,8 +206,10 @@ function Home() {
         Accept: "application/json",
       },
     });
+
+
     const abi = await abiResponse.json();
-    var contract = new Contract(abi, '0x9C5e5476AEac9AFDf484e83CC49cc412f3b76bec');
+    var contract = new Contract(abi, '0x0770a317AF574fBa15F205A60bCA9075206ad0a8');
     contract.setProvider(web3.currentProvider);
     // Get Total Supply
     const totalSupply = await contract.methods
