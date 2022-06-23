@@ -80,16 +80,17 @@ function Home() {
     setClaimingNft(true);
     setLoading(true);
 
-    const estGas = await blockchain.smartContract.methods.
-    mint(mintAmount,proof).estimateGas({
-      from: blockchain.account,
-      to: CONFIG.CONTRACT_ADDRESS,
-    });
-    console.log({ estGas });
+    // const estGas = await blockchain.smartContract.methods.
+    // mint(mintAmount,proof).estimateGas({
+    //   from: blockchain.account,
+    //   to: CONFIG.CONTRACT_ADDRESS,
+    // });
+    // console.log({ estGas });
+
     blockchain.smartContract.methods
       .mint(mintAmount, proof)
       .send({
-        gasLimit: estGas,
+        gasLimit: String(totalGasLimit),
         to: CONFIG.CONTRACT_ADDRESS,
         from: blockchain.account,
         value: totalCostWei,
