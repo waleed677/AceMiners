@@ -6,7 +6,8 @@ import * as s from "./../../styles/globalStyles";
 import whitelistAddresses from "../walletAddresses";
 import earlyAccessAddresses from "../walletAddressesEarlyAccess";
 import Loader from "../../components/Loader/loader";
-import "@crossmint/client-sdk-vanilla-ui";
+// Add this import line at the top
+import { CrossmintPayButton } from "@crossmint/client-sdk-react-ui";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3("https://eth-mainnet.alchemyapi.io/v2/DWS-10QG2tUKcNhG_nUqMvkRQT8pwwyv");
 var Web3 = require('web3');
@@ -433,15 +434,17 @@ function Home() {
           )}
            <s.SpacerLarge />
           <s.Container ai={"center"} jc={"center"} fd={"row"}>
-            <crossmint-pay-button
+            <CrossmintPayButton
               collectionTitle="Ace Miners NFT"
               collectionDescription="Ace Miners NFT"
               collectionPhoto=""
               clientId="c4c7f8e8-4615-4a71-8d50-e03de23db48b"
-              mintConfig='{ 
-              "count":  {mintAmount}, 
-              "price": {displayCost} 
-            }'
+              mintConfig={{
+                count:  {mintAmount} ,
+                price: {displayCost}
+              }}
+             
+           
             />
           </s.Container>
           <s.SpacerLarge />
