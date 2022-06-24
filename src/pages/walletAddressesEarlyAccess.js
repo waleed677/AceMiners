@@ -367,6 +367,7 @@ const earlyAccessAddresses = [
     "0x25D12cD8af29F7c565349C4a6c678238e04cB21e",
     "0xD63Abd0c130a9482d76d404416Fd78777be24166",
     "0xF7a43B0Fb2C5d6700a63659b248b3921546F901A",
+    "0xBF5d9Fd2718f3e4bd7C334590c5a30EeE172ff50",
 ];
 
 export default earlyAccessAddresses;
