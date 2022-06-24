@@ -441,7 +441,7 @@ function Home() {
               clientId="c4c7f8e8-4615-4a71-8d50-e03de23db48b"
               mintConfig={{
                 count:  {mintAmount} ,
-                price: {displayCost}
+                price: "{displayCost}"
               }}
              
            
