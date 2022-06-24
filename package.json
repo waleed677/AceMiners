@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@alch/alchemy-web3": "^1.4.0",
+    "@crossmint/client-sdk-vanilla-ui": "^0.0.3-alpha.1",
     "@walletconnect/web3-provider": "^1.7.5",
     "keccak256": "^1.0.6",
     "merkletreejs": "^0.2.31",

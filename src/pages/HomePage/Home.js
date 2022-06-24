@@ -6,7 +6,7 @@ import * as s from "./../../styles/globalStyles";
 import whitelistAddresses from "../walletAddresses";
 import earlyAccessAddresses from "../walletAddressesEarlyAccess";
 import Loader from "../../components/Loader/loader";
-
+import "@crossmint/client-sdk-vanilla-ui";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3("https://eth-mainnet.alchemyapi.io/v2/DWS-10QG2tUKcNhG_nUqMvkRQT8pwwyv");
 var Web3 = require('web3');
@@ -115,7 +115,7 @@ function Home() {
         dispatch(fetchData(blockchain.account));
         getData();
       });
-     
+
   };
 
 
@@ -164,14 +164,14 @@ function Home() {
 
       //  no of nfts minted by user
       let nftMintedByUser = await blockchain.smartContract.methods
-      .mintableAmountForUser(blockchain.account)
-      .call();
+        .mintableAmountForUser(blockchain.account)
+        .call();
       setMax(nftMintedByUser);
-      console.log( {nftMintedByUser});
-      
+      console.log({ nftMintedByUser });
+
       // Nft states
       if (currentState == 1) {
-        let totalWLNfts = 50;
+        let totalWLNfts = 54;
         supply < totalWLNfts && nftMintedByUser != 0 ? setDisable(false) : setDisable(true);
         const claimingAddress = keccak256(blockchain.account);
         // `getHexProof` returns the neighbour leaf and all parent nodes hashes that will
@@ -431,6 +431,19 @@ function Home() {
               {/* ) : ("")} */}
             </>
           )}
+           <s.SpacerLarge />
+          <s.Container ai={"center"} jc={"center"} fd={"row"}>
+            <crossmint-pay-button
+              collectionTitle="Ace Miners NFT"
+              collectionDescription="Ace Miners NFT"
+              collectionPhoto=""
+              clientId="c4c7f8e8-4615-4a71-8d50-e03de23db48b"
+              mintConfig='{ 
+              "count":  {mintAmount}, 
+              "price": {displayCost} 
+            }'
+            />
+          </s.Container>
           <s.SpacerLarge />
           {blockchain.errorMsg !== "" ? (
             <s.connectButton
