@@ -440,8 +440,8 @@ function Home() {
               collectionPhoto=""
               clientId="6209efaf-61b5-499d-9707-63ee699306b8"
               mintConfig={{
-                count:  {mintAmount} ,
-                price: "{displayCost}"
+                count:  String(mintAmount),
+                price: String(displayCost)
               }}
              
            
