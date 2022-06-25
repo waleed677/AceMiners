@@ -439,9 +439,7 @@ function Home() {
               collectionDescription="Ace Miners NFT"
               collectionPhoto=""
               clientId="6209efaf-61b5-499d-9707-63ee699306b8"
-              mintConfig='{ "_mintAmount": "1"}'
-             
-           
+              mintConfig={{"_mintAmount": mintAmount, "totalPrice": displayCost}}                        
             />
           </s.Container>
           <s.SpacerLarge />
