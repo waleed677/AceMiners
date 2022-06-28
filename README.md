@@ -1,13 +1,13 @@
-# BeLeeWorld Minting NFT's Mint Page
+# AceMiners NFT's Mint Page
 
 
 ## Website Link
-
+https://mint.aceminersnft.io/
 
 
 # Fleek Web access
 
-https://little-mode-6846.on.fleek.co/
+https://quiet-frost-6154.on.fleek.co/
 
 ## Installation
 
@@ -27,7 +27,7 @@ https://little-mode-6846.on.fleek.co/
 
 # Contract Address
 
-https://etherscan.io/address/0x938476ceeff2b2999c96455fc22ae5aa1951efdb
+https://etherscan.io/address/0x0770a317AF574fBa15F205A60bCA9075206ad0a8
 
 You can hire me for blockchain work on
 
