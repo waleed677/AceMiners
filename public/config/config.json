@@ -1,12 +1,12 @@
 {
-  "CONTRACT_ADDRESS": "0x1fF57724ff5B028c3Ee21b5EBb6BeE933Fd46AdF",
-  "SCAN_LINK": "https://etherscan.io/address/0x0770a317AF574fBa15F205A60bCA9075206ad0a8",
+  "CONTRACT_ADDRESS": "0xe635Bd48F69276D6f52cc2e577E5DdecCf16B79c",
+  "SCAN_LINK": "https://etherscan.io/address/0xe635Bd48F69276D6f52cc2e577E5DdecCf16B79c",
   "NETWORK": {
     "NAME": "Ethereum",
     "SYMBOL": "ETH",
-    "ID": 4
+    "ID": 1
   },
-  "NETWORK_ID_WALLET" :4,
+  "NETWORK_ID_WALLET" :1,
   "NFT_NAME": "Aceminers NFT",
   "SYMBOL": "AM",
   "MAX_SUPPLY": 1500 ,
