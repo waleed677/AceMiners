@@ -172,7 +172,7 @@ function Home() {
 
       // Nft states
       if (currentState == 1) {
-        let totalWLNfts = 54;
+        let totalWLNfts = 200;
         supply < totalWLNfts && nftMintedByUser != 0 ? setDisable(false) : setDisable(true);
         const claimingAddress = keccak256(blockchain.account);
         // `getHexProof` returns the neighbour leaf and all parent nodes hashes that will
@@ -209,7 +209,7 @@ function Home() {
         }
       }
       else {
-        let totalPublic = 500;
+        let totalPublic = 1300;
         supply < totalPublic ? setDisable(false) : setDisable(true);
         setFeedback(`Welcome, you can mint up to ${nftMintedByUser} NFTs per transaction`)
       }
@@ -226,7 +226,7 @@ function Home() {
 
 
     const abi = await abiResponse.json();
-    var contract = new Contract(abi, '0x0770a317AF574fBa15F205A60bCA9075206ad0a8');
+    var contract = new Contract(abi, '0x1fF57724ff5B028c3Ee21b5EBb6BeE933Fd46AdF');
     contract.setProvider(web3.currentProvider);
     // Get Total Supply
     const totalSupply = await contract.methods
