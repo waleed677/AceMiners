@@ -9,7 +9,7 @@ import Loader from "../../components/Loader/loader";
 // Add this import line at the top
 import { CrossmintPayButton } from "@crossmint/client-sdk-react-ui";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
-const web3 = createAlchemyWeb3("https://eth-mainnet.alchemyapi.io/v2/DWS-10QG2tUKcNhG_nUqMvkRQT8pwwyv");
+const web3 = createAlchemyWeb3("https://eth-rinkeby.alchemyapi.io/v2/DWS-10QG2tUKcNhG_nUqMvkRQT8pwwyv");
 var Web3 = require('web3');
 var Contract = require('web3-eth-contract');
 const { MerkleTree } = require('merkletreejs');
