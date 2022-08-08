@@ -26,7 +26,7 @@ console.log('Whitelist Merkle Tree\n', merkleTree.toString());
 const leafNodesEarly = earlyAccessAddresses.map(addr => keccak256(addr));
 const merkleTreeEarly = new MerkleTree(leafNodesEarly, keccak256, { sortPairs: true });
 const rootHashEarly = merkleTreeEarly.getRoot();
-console.log('Early Access Tree\n', merkleTreeEarly.toString());
+// console.log('Early Access Tree\n', merkleTreeEarly.toString());
 
 
 
