@@ -98,6 +98,8 @@ const whitelistAddresses = [
 "0x1710bcf82fE1EeE9D31c81Bbb571eCBEe2BcdF07",
 "0x3c8837de7e561EEcD9aC19B0ACdb62c6c6f43cc5",
 "0xcf990161909af6BF4e5c3bcfFF255142Ca86a15f",
+"0xE11D08e4EA85dc79d63020d99f02f659B17F36DB"
+  
 ];
 
 export default whitelistAddresses;
