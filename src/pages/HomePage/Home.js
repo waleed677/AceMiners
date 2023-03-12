@@ -209,7 +209,7 @@ function Home() {
         }
       }
       else {
-        let totalPublic = 1300;
+        let totalPublic = 1500;
         supply < totalPublic ? setDisable(false) : setDisable(true);
         setFeedback(`Welcome, you can mint up to ${nftMintedByUser} NFTs per transaction`)
       }
